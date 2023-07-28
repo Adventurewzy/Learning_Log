@@ -1,0 +1,2 @@
+# Learning_Log
+基于Django4框架的在线日志记录web应用程序
