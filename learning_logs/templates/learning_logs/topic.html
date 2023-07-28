@@ -1,0 +1,49 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block page_header %}
+<h2>{{ topic.text }}
+    {% if is_owner %}
+        <a class="btn btn-primary btn-sm mb-6 mt-1 "
+           href="{% url 'learning_logs:edit_topic' topic.id %}">
+            编辑主题 &raquo;</a>
+        <a class="btn btn-danger btn-sm mb-6 mt-1"
+            href="{% url 'learning_logs:delete_topic' topic.id %}">
+            删除主题 &raquo;</a>
+    {% endif %}
+</h2>
+{% endblock page_header %}
+
+{% block content %}
+
+{% if is_owner %}
+    <p>
+        <a class="btn btn-primary  mt-1"
+           href="{% url 'learning_logs:new_entry' topic.id %}">添加新的条目 &raquo;</a>
+    </p>
+{% endif %}
+
+
+<ul>
+    {% for entry in entries %}
+        <div class="card mb-3">
+            <!-- 包含时间戳和编辑链接的标题 -->
+            <h4 class="card-header">
+                {{entry.date_added|date:'M d, Y H:i'}}
+                {% if is_owner %}
+                    <a class="btn btn-primary btn-sm " href="{% url 'learning_logs:edit_entry' entry.id %}">
+                        编辑</a>
+                    <a class="btn btn-danger btn-sm " href="{% url 'learning_logs:delete_entry' entry.id %}">
+                        删除</a>
+                {% endif %}
+            </h4>
+            <!-- 包含条目文本的正文 -->
+            <div class="card-body">{{ entry.text|linebreaks }}</div>
+        </div>
+    {% empty %}
+        <p>此主题下还没有条目.(There are no entries for this topic yet.)</p>
+    {% endfor %}
+
+
+</ul>
+
+{% endblock content %}

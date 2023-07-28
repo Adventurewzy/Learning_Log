@@ -1,0 +1,19 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block page_header %}
+<h2>删除条目</h2>
+{% endblock page_header %}
+
+{% block content %}
+<h4>您确定要删除该条目吗？</h4>
+<div class="card mb-3">
+    <h4 class="card-header">所属主题:{{topic.text}}</h4>
+    <div class="card-body">{{ entry.text }}</div>
+</div>
+<form  method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">确认删除</button>
+    <a href="{% url 'learning_logs:topics' %}" class="btn btn-primary">取消</a>
+</form>
+
+{% endblock content %}

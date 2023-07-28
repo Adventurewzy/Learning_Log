@@ -1,0 +1,28 @@
+{% extends 'learning_logs/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block page_header %}
+<h2>新条目</h2>
+<h5>New Entry</h5>
+{% endblock page_header %}
+
+{% block content %}
+
+  <div class="card ">
+    <h4 class="card-header"
+        href="{% url 'learning_logs:topic' topic.id %}" >{{ topic }}
+    </h4>
+    <div class="card-body">
+      <form action="{% url 'learning_logs:new_entry' topic.id %}" method='post'>
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      {% bootstrap_button button_type="submit" content="添加 &raquo;"%}
+      </form>
+    </div>
+  </div>
+
+
+{% endblock content %}
+
+
+

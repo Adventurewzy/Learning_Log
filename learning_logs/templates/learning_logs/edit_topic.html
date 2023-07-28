@@ -1,0 +1,15 @@
+{% extends 'learning_logs/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block page_header %}
+<h2>编辑主题名称</h2>
+<h4>Edit Topic Title</h4>
+{% endblock page_header %}
+
+{% block content %}
+ <form action="{% url 'learning_logs:edit_topic' topic.id%}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button button_type="submit" content="确认修改 &raquo;"%}
+ </form>
+{% endblock content%}

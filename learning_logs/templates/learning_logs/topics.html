@@ -1,0 +1,43 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block page_header %}
+<h1>主题</h1>
+<h5>Topics</h5>
+{% endblock page_header %}
+
+{% block content %}
+
+<!-- 仅当用户已登录时显示 ‘我的主题’ -->
+{% if user.is_authenticated %}
+  <ul class="list-group border-bottom pb-2 mb-4">
+    <h5>我的主题</h5>
+    {% for topic in topics %}
+      <li class="list-group-item border-0">
+        <a href="{% url 'learning_logs:topic' topic.id %}"
+           style="font-size: 20px">
+        {{ topic.text }}</a>
+      </li>
+    {% empty %}
+      <li class="list-group-item border-0">您还没有添加任何主题.(No topics have been added yet.)</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+<a class="btn btn-primary  mt-0 pb-2" href=
+        "{% url 'learning_logs:new_topic' %}">添加新主题 &raquo;</a>
+
+
+<ul class="list-group border-bottom mt-5 pb-2 mb-4">
+  <h5>公开的主题</h5>
+  {% for topic in public_topics %}
+    <li class="list-group-item border-0">
+      <a href="{% url 'learning_logs:topic' topic.id %}" style="font-size: 20px">{{ topic.text }}</a>
+      <p>--by: {{topic.owner}}</p>
+    </li>
+  {% empty %}
+    <li class="list-group-item border-0">
+      当前还没有用户公开主题.(No users have posted any public topics yet.)</li>
+  {% endfor %}
+</ul>
+
+
+{% endblock content %}

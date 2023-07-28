@@ -1,0 +1,38 @@
+{% extends 'learning_logs/base.html' %}
+{% load static %}
+
+{% block page_header %}
+    <div class="p-3 mb-4 bg-light border rounded-3">
+        <div class="container-fluid py-4">
+            <h1 class="display-3">记录学习</h1>
+            <h2 class="display-3">Trak your learning.</h2>
+            <p class="lead">
+                制作您自己的学习日志，并列出您正在学习的主题.
+                每当您学到有关某个主题的新知识时，请记录下来总结您所学到的内容.</p>
+
+            <p>您可以通过创建主题来记录最近开始接触的新鲜事物,然后通过在该主题下创建具体的条目来记录您的学习进度.</p>
+            <p>本网站还提供公开主题功能,您可以在主题的编辑与创建栏中勾选‘public’来分享自己的主题.</p>
+            <p>所有的用户均可查看已被公开的主题.</p>
+            <p>Make your own Learning Log, and keep a list of the topics
+                you're learning about. Whenever you learn something new
+                about a topic, make an entry summarizing what you've learned.</p>
+
+            {% if user.is_authenticated %}
+                <a class="btn btn-primary btn-lg mt-1"
+                    href="{% url 'learning_logs:topics' %}">查看已有主题 &raquo;</a>
+            {% else %}
+                <a class="btn btn-primary btn-lg mt-1"
+                    href="{% url 'accounts:register' %}">创建自己的学习日志 &raquo;</a>
+                <a class="btn btn-primary btn-lg  mt-1"
+                    href="{% url 'learning_logs:topics' %}">浏览公开的主题 &raquo;</a>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock page_header %}
+
+
+
+
+
+
