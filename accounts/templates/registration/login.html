@@ -1,0 +1,17 @@
+{% extends 'learning_logs/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block page_header %}
+    <h2> 账号登录 </h2>
+    <h5> Log in to your account. </h5>
+{% endblock page_header%}
+
+{% block content%}
+
+ <form action="{% url 'accounts:login' %}" method="post">
+     {% csrf_token %}
+     {% bootstrap_form form %}
+     {% bootstrap_button button_type="submit" content="Log in &raquo;" %}
+ </form>
+
+{% endblock content %}
